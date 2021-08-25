@@ -13,7 +13,7 @@ import { logHandler } from "./utils/logHandler";
 
     bot.on("ready", async () => await ready(bot));
 
-    bot.on("guildMemberAdd", (member) => guildMemberAdd(member));
+    bot.on("guildMemberAdd", async (member) => await guildMemberAdd(member));
 
     bot.on(
       "interactionCreate",

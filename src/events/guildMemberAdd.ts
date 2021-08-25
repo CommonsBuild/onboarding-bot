@@ -1,6 +1,7 @@
 import { GuildMember } from "discord.js";
 
 import { logHandler } from "../utils/logHandler";
+import { sendLogMessage } from "../utils/sendLogMessage";
 
 /**
  * Handles the member add event. Sets a timeout to kick members
@@ -8,8 +9,11 @@ import { logHandler } from "../utils/logHandler";
  *
  * @param {GuildMember} member The GuildMember object representing the member that joined.
  */
-export const guildMemberAdd = (member: GuildMember): void => {
+export const guildMemberAdd = async (member: GuildMember): Promise<void> => {
   try {
+    await sendLogMessage(
+      `${member.user.tag} has joined. Will kick in 5 minutes if they do not verify.`
+    );
     setTimeout(async () => {
       const updated = await member.fetch();
       if (
@@ -18,6 +22,9 @@ export const guildMemberAdd = (member: GuildMember): void => {
         )
       ) {
         await updated.kick();
+        await sendLogMessage(
+          `${member.user.tag} was kicked because they did not verify within 5 minutes.`
+        );
       }
     }, 300000);
   } catch (err) {
