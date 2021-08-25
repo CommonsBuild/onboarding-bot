@@ -4,6 +4,7 @@ import { Client } from "discord.js";
 
 import { CommandList } from "../commands/_CommandList";
 import { logHandler } from "../utils/logHandler";
+import { sendLogMessage } from "../utils/sendLogMessage";
 
 /**
  * Handles the ready event, which fires when the bot connects
@@ -34,6 +35,9 @@ export const ready = async (bot: Client): Promise<void> => {
     );
 
     logHandler.log("debug", "registered commands");
+    await sendLogMessage(
+      `Bot has loaded! Version ${process.env.npm_package_version}`
+    );
   } catch (err) {
     logHandler.log("error", `${err.message}\n${err.stack}`);
   }
