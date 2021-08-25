@@ -7,6 +7,7 @@ import {
 } from "discord.js";
 
 import { logHandler } from "../utils/logHandler";
+import { sendLogMessage } from "../utils/sendLogMessage";
 
 import { questionThree } from "./questionThree";
 
@@ -62,13 +63,26 @@ export const questionTwo = async (
     collector.on("collect", async (collected) => {
       if (collected.isSelectMenu()) {
         if (collected.values[0] === "coc") {
+          await collected.reply({
+            content: "Correct! Please check the form for the next question.",
+            ephemeral: true,
+          });
           await questionThree(interaction);
         } else {
           await interaction.editReply({
             content: "You failed to select the correct answer.",
             components: [],
           });
-          setTimeout(async () => await member.kick(), 5000);
+          await collected.reply({
+            content: "You will now be kicked.",
+            ephemeral: true,
+          });
+          setTimeout(async () => {
+            await member.kick();
+            await sendLogMessage(
+              `${interaction.user.tag} was kicked for answering the third question incorrectly.`
+            );
+          }, 5000);
         }
       }
     });
