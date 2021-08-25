@@ -7,6 +7,7 @@ import {
 } from "discord.js";
 
 import { logHandler } from "../utils/logHandler";
+import { sendLogMessage } from "../utils/sendLogMessage";
 
 import { questionTwo } from "./questionTwo";
 
@@ -48,7 +49,8 @@ export const questionOne = async (
     const component = new MessageActionRow().addComponents([question]);
 
     const first = (await interaction.editReply({
-      content: "Please complete this form to gain access to the server.",
+      content:
+        "Hello! Welcome to the verification process!\nYou will be asked a series of three questions. You have one minute to answer each questions. Answering incorrectly will result in a kick.\nTo select an answer, click the dropdown!",
       components: [component],
     })) as Message;
 
@@ -62,13 +64,26 @@ export const questionOne = async (
     collector.on("collect", async (collected) => {
       if (collected.isSelectMenu()) {
         if (collected.values[0] === "danny") {
+          await collected.reply({
+            content: "Correct! Please check the form for the next question.",
+            ephemeral: true,
+          });
           await questionTwo(interaction);
         } else {
           await interaction.editReply({
             content: "You failed to select the correct answer.",
             components: [],
           });
-          setTimeout(async () => await member.kick(), 5000);
+          await collected.reply({
+            content: "You will now be kicked.",
+            ephemeral: true,
+          });
+          setTimeout(async () => {
+            await member.kick();
+            await sendLogMessage(
+              `${interaction.user.tag} was kicked for answering the first question incorrectly.`
+            );
+          }, 5000);
         }
       }
     });
