@@ -40,7 +40,8 @@
           "FunctionDeclaration": true,
           "FunctionExpression": true,
           "MethodDefinition": true
-        }
+        },
+        "publicOnly": true
       }
     ],
     "jsdoc/require-description-complete-sentence": "error",

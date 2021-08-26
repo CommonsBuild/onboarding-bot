@@ -55,7 +55,6 @@ export const questionOne = async (
     })) as Message;
 
     const collector = first.createMessageComponentCollector({
-      // eslint-disable-next-line jsdoc/require-jsdoc
       filter: (el) => el.user.id === interaction.user.id,
       max: 1,
       time: 60000,
