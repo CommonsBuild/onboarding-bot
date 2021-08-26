@@ -1,4 +1,5 @@
 import {
+  ButtonInteraction,
   CommandInteraction,
   GuildMember,
   Message,
@@ -17,7 +18,7 @@ import { questionThree } from "./questionThree";
  * @param {CommandInteraction} interaction The command interaction.
  */
 export const questionTwo = async (
-  interaction: CommandInteraction
+  interaction: ButtonInteraction
 ): Promise<void> => {
   try {
     if (!interaction.member) {

@@ -1,6 +1,6 @@
 import { Interaction } from "discord.js";
 
-import { CommandList } from "../commands/_CommandList";
+import { questionOne } from "../modules/questionOne";
 import { logHandler } from "../utils/logHandler";
 
 /**
@@ -12,12 +12,11 @@ export const interactionCreate = async (
   interaction: Interaction
 ): Promise<void> => {
   try {
-    if (interaction.isCommand()) {
-      for (const Command of CommandList) {
-        if (interaction.commandName === Command.data.name) {
-          await Command.run(interaction);
-          break;
-        }
+    if (interaction.isButton()) {
+      switch (interaction.customId) {
+        case "verify":
+          await interaction.deferReply({ ephemeral: true });
+          await questionOne(interaction);
       }
     }
   } catch (err) {

@@ -1,5 +1,5 @@
 import {
-  CommandInteraction,
+  ButtonInteraction,
   GuildMember,
   Message,
   MessageActionRow,
@@ -14,10 +14,10 @@ import { questionTwo } from "./questionTwo";
 /**
  * Handles the first question for the verification process.
  *
- * @param {CommandInteraction} interaction The command interaction.
+ * @param {ButtonInteraction} interaction The command interaction.
  */
 export const questionOne = async (
-  interaction: CommandInteraction
+  interaction: ButtonInteraction
 ): Promise<void> => {
   try {
     if (!interaction.member) {

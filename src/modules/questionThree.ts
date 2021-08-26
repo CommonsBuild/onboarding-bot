@@ -1,4 +1,5 @@
 import {
+  ButtonInteraction,
   CommandInteraction,
   Guild,
   GuildMember,
@@ -18,7 +19,7 @@ import { verifyUser } from "./verifyUser";
  * @param {CommandInteraction} interaction The command interaction.
  */
 export const questionThree = async (
-  interaction: CommandInteraction
+  interaction: ButtonInteraction
 ): Promise<void> => {
   try {
     if (!interaction.member) {
