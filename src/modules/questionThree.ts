@@ -98,7 +98,8 @@ export const questionThree = async (
         }
       }
     });
-  } catch (err) {
+  } catch (e) {
+    const err = e as Error;
     logHandler.log("error", `${err.message}\n${err.stack}`);
   }
 };
