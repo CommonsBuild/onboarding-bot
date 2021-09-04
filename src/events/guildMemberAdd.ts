@@ -27,7 +27,8 @@ export const guildMemberAdd = async (member: GuildMember): Promise<void> => {
         );
       }
     }, 300000);
-  } catch (err) {
+  } catch (e) {
+    const err = e as Error;
     logHandler.log("error", `${err.message}\n${err.stack}`);
   }
 };

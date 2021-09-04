@@ -13,7 +13,8 @@ export const sendLogMessage = async (message: string): Promise<void> => {
     const hook = new WebhookClient({ url: process.env.WH_URL || "oh no" });
 
     await hook.send({ content: message });
-  } catch (err) {
+  } catch (e) {
+    const err = e as Error;
     logHandler.log("error", `${err.message}\n${err.stack}`);
   }
 };

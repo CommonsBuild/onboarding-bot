@@ -11,7 +11,8 @@ export const ready = async (): Promise<void> => {
     await sendLogMessage(
       `Bot has loaded! Version ${process.env.npm_package_version}`
     );
-  } catch (err) {
+  } catch (e) {
+    const err = e as Error;
     logHandler.log("error", `${err.message}\n${err.stack}`);
   }
 };

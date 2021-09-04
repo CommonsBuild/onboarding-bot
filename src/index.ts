@@ -24,7 +24,8 @@ import { logHandler } from "./utils/logHandler";
     );
 
     bot.on("messageCreate", async (message) => await onMessage(message));
-  } catch (err) {
+  } catch (e) {
+    const err = e as Error;
     logHandler.log("error", `${err.message}\n${err.stack}`);
   }
 })();
