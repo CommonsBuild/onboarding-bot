@@ -14,7 +14,7 @@ import { logHandler } from "./utils/logHandler";
 
     await bot.login(process.env.TOKEN || "oh no");
 
-    bot.on("ready", async () => await ready(bot));
+    bot.on("ready", async () => await ready());
 
     bot.on("guildMemberAdd", async (member) => await guildMemberAdd(member));
 
