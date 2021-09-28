@@ -1,6 +1,6 @@
 import { Interaction } from "discord.js";
 
-import { questionOne } from "../modules/questionOne";
+import { question } from "../modules/question";
 import { logHandler } from "../utils/logHandler";
 
 /**
@@ -16,7 +16,7 @@ export const interactionCreate = async (
       switch (interaction.customId) {
         case "verify":
           await interaction.deferReply({ ephemeral: true });
-          await questionOne(interaction);
+          await question(interaction);
       }
     }
   } catch (e) {

@@ -1,6 +1,7 @@
 import {
   ButtonInteraction,
   CommandInteraction,
+  Guild,
   GuildMember,
   Message,
   MessageActionRow,
@@ -10,14 +11,14 @@ import {
 import { logHandler } from "../utils/logHandler";
 import { sendLogMessage } from "../utils/sendLogMessage";
 
-import { questionThree } from "./questionThree";
+import { verifyUser } from "./verifyUser";
 
 /**
- * Handles the second question for the verification process.
+ * Handles the question for the verification process.
  *
  * @param {CommandInteraction} interaction The command interaction.
  */
-export const questionTwo = async (
+export const question = async (
   interaction: ButtonInteraction
 ): Promise<void> => {
   try {
@@ -27,23 +28,28 @@ export const questionTwo = async (
     }
     const member = interaction.member as GuildMember;
     const question = new MessageSelectMenu()
-      .setCustomId("server-name")
-      .setPlaceholder("What is the name of this server?")
+      .setCustomId("channel-name")
+      .setPlaceholder("Are you a bot?")
       .addOptions([
         {
-          label: "Commit Your Code!",
-          description: "The name of this server is Commit Your Code!",
-          value: "coc",
+          label: "Beep boop",
+          description: "Beep Boop, Boop Beep",
+          value: "beep"
         },
         {
-          label: "nhcommunity",
-          description: "The name of this server is nhcommunity!",
-          value: "nh",
+          label: "NO",
+          description: "No, I am not a Bot",
+          value: "no",
         },
         {
-          label: "Discord Developers",
-          description: "The name of this server is Discord Developers!",
-          value: "ddev",
+          label: "gimme legs",
+          description: "Father, give me legs",
+          value: "legs",
+        },
+        {
+          label: "screech",
+          description: "*screech*",
+          value: "screech",
         },
       ]);
 
@@ -62,12 +68,23 @@ export const questionTwo = async (
 
     collector.on("collect", async (collected) => {
       if (collected.isSelectMenu()) {
-        if (collected.values[0] === "coc") {
+        if (collected.values[0] === "no") {
           await collected.reply({
-            content: "Correct! Please check the form for the next question.",
+            content: "Correct! Please wait...",
             ephemeral: true,
           });
-          await questionThree(interaction);
+          await interaction.editReply({
+            content: "Congrats! You will be verified shortly.",
+            components: [],
+          });
+          setTimeout(
+            async () =>
+              await verifyUser(
+                interaction.member as GuildMember,
+                interaction.guild as Guild
+              ),
+            5000
+          );
         } else {
           await interaction.editReply({
             content: "You failed to select the correct answer.",
@@ -78,10 +95,19 @@ export const questionTwo = async (
             ephemeral: true,
           });
           setTimeout(async () => {
+            try {
             await member.kick();
             await sendLogMessage(
-              `${interaction.user.tag} was kicked for answering the second question incorrectly: ${collected.values[0]}`
+              `${interaction.user.tag} was kicked for answering the question incorrectly: ${collected.values[0]}`
             );
+            }
+            catch (e) {
+                const err = e as Error;
+                logHandler.log("error", `${err.message}\n${err.stack}`);
+                await sendLogMessage(
+                    `${interaction.user.tag} can not be kicked for answering the question incorrectly... They are immune...`
+                )
+            }
           }, 5000);
         }
       }

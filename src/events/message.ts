@@ -14,12 +14,12 @@ import {
 export const onMessage = async (message: Message): Promise<void> => {
   if (
     message.content === "~init" &&
-    message.author.id === "465650873650118659"
+    message.author.id === "558192816308617227"
   ) {
     const embed = new MessageEmbed();
-    embed.setTitle("Welcome to Commit Your Code!");
+    embed.setTitle("Welcome to the TEC!");
     embed.setDescription(
-      "In order to verify, you need to answer three questions. Answering incorrectly will result in a kick. Failure to verify in 5 minutes will result in a kick.\n\nClick the button below to get started.\n\nIf you get stuck, DM <@!465650873650118659>."
+      "In order to verify, you need to answer the questions. Answering incorrectly will result in a kick. Failure to verify in 5 minutes will result in a kick.\n\nClick the button below to get started.\n\nIf you get stuck, DM <@!558192816308617227>."
     );
 
     const button = new MessageButton()
