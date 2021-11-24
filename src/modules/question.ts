@@ -4,6 +4,7 @@ import {
   Guild,
   GuildMember,
   Message,
+  MessageButton,
   MessageActionRow,
   MessageSelectMenu,
 } from "discord.js";
@@ -41,16 +42,6 @@ export const question = async (
           description: "No, I am not a Bot",
           value: "no",
         },
-        {
-          label: "gimme legs",
-          description: "Father, give me legs",
-          value: "legs",
-        },
-        {
-          label: "screech",
-          description: "*screech*",
-          value: "screech",
-        },
       ]);
 
     const component = new MessageActionRow().addComponents([question]);
@@ -85,6 +76,15 @@ export const question = async (
               ),
             5000
           );
+          const button = new MessageButton()
+            .setLabel("Check out the Server Guide")
+            .setURL(
+            "https://discord.com/channels/810180621930070088/913086515574358066/913110202218319932")
+            .setStyle("LINK");
+          await interaction.editReply({
+            content: "For more info about the TEC, check out the <#913086515574358066> channel",
+            components: [new MessageActionRow().addComponents(button)]
+          }) 
         } else {
           await interaction.editReply({
             content: "You failed to select the correct answer.",
