@@ -1,6 +1,6 @@
-# Project Name
+# tec-onboarding-bot
 
-Project Description
+Discord Bot that creates an Onboarding Flow in TEC's Server.
 
 ## Live Version
 
@@ -33,3 +33,4 @@ The full license terms may be viewed in the [LICENSE.md file](./LICENSE.md)
 ## Contact
 
 We may be contacted through our [Chat Server](http://chat.nhcarrigan.com) or via [email form](https://contact.nhcarrigan.com).
+
