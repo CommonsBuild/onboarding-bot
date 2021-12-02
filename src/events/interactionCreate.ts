@@ -1,9 +1,18 @@
 import { Interaction } from "discord.js";
 
-import { question } from "../modules/question";
-import { about, aboutWG, aboutTE,  mvv, usingDiscord, aboutPraise, contribute, aboutProposals, aboutCommons } from "../modules/about";
+import {
+  about,
+  aboutWG,
+  aboutTE,
+  aboutCommons,
+  aboutPraise,
+  aboutProposals,
+  mvv,
+  usingDiscord,
+  contribute,
+} from "../modules/about";
 // import { schedule } from "../modules/schedule";
-
+import { question } from "../modules/question";
 import { logHandler } from "../utils/logHandler";
 
 /**
@@ -32,6 +41,7 @@ export const interactionCreate = async (
         case "contribute":
           await interaction.deferReply({ ephemeral: true });
           await contribute(interaction);
+          break;
         case "praise":
           await interaction.deferReply({ ephemeral: true });
           await aboutPraise(interaction);

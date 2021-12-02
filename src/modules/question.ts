@@ -35,7 +35,7 @@ export const question = async (
         {
           label: "Beep boop",
           description: "Beep Boop, Boop Beep",
-          value: "beep"
+          value: "beep",
         },
         {
           label: "NO",
@@ -79,12 +79,14 @@ export const question = async (
           const button = new MessageButton()
             .setLabel("Check out the Server Guide")
             .setURL(
-            "https://discord.com/channels/810180621930070088/913086515574358066/913110202218319932")
+              "https://discord.com/channels/810180621930070088/913086515574358066/913110202218319932"
+            )
             .setStyle("LINK");
           await interaction.editReply({
-            content: "For more info about the TEC, check out the <#913086515574358066> channel",
-            components: [new MessageActionRow().addComponents(button)]
-          }) 
+            content:
+              "For more info about the TEC, check out the <#913086515574358066> channel",
+            components: [new MessageActionRow().addComponents(button)],
+          });
         } else {
           await interaction.editReply({
             content: "You failed to select the correct answer.",
@@ -96,17 +98,16 @@ export const question = async (
           });
           setTimeout(async () => {
             try {
-            await member.kick();
-            await sendLogMessage(
-              `${interaction.user.tag} was kicked for answering the question incorrectly: ${collected.values[0]}`
-            );
-            }
-            catch (e) {
-                const err = e as Error;
-                logHandler.log("error", `${err.message}\n${err.stack}`);
-                await sendLogMessage(
-                    `${interaction.user.tag} can not be kicked for answering the question incorrectly... They are immune...`
-                )
+              await member.kick();
+              await sendLogMessage(
+                `${interaction.user.tag} was kicked for answering the question incorrectly: ${collected.values[0]}`
+              );
+            } catch (e) {
+              const err = e as Error;
+              logHandler.log("error", `${err.message}\n${err.stack}`);
+              await sendLogMessage(
+                `${interaction.user.tag} can not be kicked for answering the question incorrectly... They are immune...`
+              );
             }
           }, 5000);
         }

@@ -38,7 +38,9 @@ export const onMessage = async (message: Message): Promise<void> => {
   ) {
     const embed = new MessageEmbed();
     embed.setTitle("Welcome to the TEC!");
-    embed.setDescription("Hello there! This channel provides a general overview about the TEC, click on the buttons below to start your journey into our community.");
+    embed.setDescription(
+      "Hello there! This channel provides a general overview about the TEC, click on the buttons below to start your journey into our community."
+    );
 
     const aboutButton = new MessageButton()
       .setCustomId("about")
@@ -50,10 +52,12 @@ export const onMessage = async (message: Message): Promise<void> => {
       .setLabel("How is the TEC organised?")
       .setStyle("PRIMARY");
 
+    /*
     const discordButton = new MessageButton()
       .setCustomId("discord-channels")
       .setLabel("How to use the Discord?")
       .setStyle("PRIMARY");
+    */
 
     const proposalButton = new MessageButton()
       .setCustomId("proposal")
@@ -65,22 +69,25 @@ export const onMessage = async (message: Message): Promise<void> => {
       .setLabel("What is Praise?")
       .setStyle("PRIMARY");
 
-    const buttons_a = new MessageActionRow().addComponents(
+    const buttonsA = new MessageActionRow().addComponents(
       aboutButton,
       wgButton,
       praiseButton
     );
-    const buttons_b = new MessageActionRow().addComponents(
-      proposalButton,
+    const buttonsB = new MessageActionRow().addComponents(
+      proposalButton
       //discordButton
-    )
-    const buttons_c = new MessageActionRow().addComponents(
+    );
+    const buttonsC = new MessageActionRow().addComponents(
       new MessageButton()
         .setCustomId("contribute")
         .setLabel("I want to contribute to the TEC!")
         .setStyle("SUCCESS")
-    )
-    await message.channel.send({ embeds: [embed], components: [buttons_a, buttons_b, buttons_c] });
+    );
+    await message.channel.send({
+      embeds: [embed],
+      components: [buttonsA, buttonsB, buttonsC],
+    });
     await message.delete();
   }
 };
