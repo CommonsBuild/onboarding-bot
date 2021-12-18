@@ -61,8 +61,9 @@ export const question = async (
       if (collected.isSelectMenu()) {
         if (collected.values[0] === "no") {
           await interaction.editReply({
-            content: "Correct! Please wait...\nYou will be given access shortly...",
-            components: []
+            content:
+              "Correct! Please wait...\nYou will be given access shortly...",
+            components: [],
           });
           setTimeout(
             async () =>
