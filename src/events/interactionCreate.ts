@@ -1,15 +1,11 @@
 import { Interaction } from "discord.js";
 
-import {
-  about,
-  aboutWG,
-  aboutPraise,
-  aboutProposals,
-  usingDiscord,
-  contribute,
-} from "../modules/about";
-// import { schedule } from "../modules/schedule";
-import { question } from "../modules/question";
+import { aboutMenu } from "../modules/guide/aboutMenu";
+import { contributeMenu } from "../modules/guide/contributeMenu";
+import { organisationMenu } from "../modules/guide/organisationMenu";
+import { praiseMenu } from "../modules/guide/praiseMenu";
+import { proposalsMenu } from "../modules/guide/proposalsMenu";
+import { question } from "../modules/verification/question";
 import { logHandler } from "../utils/logHandler";
 
 /**
@@ -29,29 +25,24 @@ export const interactionCreate = async (
           break;
         case "about":
           await interaction.deferReply({ ephemeral: true });
-          await about(interaction);
+          await aboutMenu(interaction);
           break;
         case "wg":
           await interaction.deferReply({ ephemeral: true });
-          await aboutWG(interaction);
-          break;
-        case "contribute":
-          await interaction.deferReply({ ephemeral: true });
-          await contribute(interaction);
+          await organisationMenu(interaction);
           break;
         case "praise":
           await interaction.deferReply({ ephemeral: true });
-          await aboutPraise(interaction);
+          await praiseMenu(interaction);
           break;
         case "proposal":
           await interaction.deferReply({ ephemeral: true });
-          await aboutProposals(interaction);
+          await proposalsMenu(interaction);
           break;
-        case "discord-channels":
+        case "contribute":
           await interaction.deferReply({ ephemeral: true });
-          await usingDiscord(interaction);
+          await contributeMenu(interaction);
           break;
-
         /*
         case "time":
           await interaction.deferReply({ ephemeral: true });
