@@ -1,4 +1,5 @@
 import {
+  Message,
   ButtonInteraction,
   CommandInteraction,
   MessageButton,
@@ -41,11 +42,37 @@ export const about = async (interaction: ButtonInteraction): Promise<void> => {
       mvvButton,
       websiteButton
     );
-    //const response =
-    await interaction.editReply({
+    const message = (await interaction.editReply({
       content:
         "The TEC is an **open source** and **collectively governed project** that aims to create a token economy that will accelerate the responsible & ethical creation of public goods within the TE community. The TEC is the first product of the Common Stack. ([Deep Dive](https://medium.com/token-engineering-commons/kicking-off-the-token-engineering-commons-be6a253cba81))\n\nJump directly to our [TEC Handbook](https://token-engineering-commons.gitbook.io/tec-handbook)",
       components: [buttons],
+    })) as Message;
+
+    const collector = message.createMessageComponentCollector({
+      filter: (click) => click.user.id === interaction.user.id,
+      time: 270000,
+    });
+
+    collector.on("collect", async (click) => {
+      await click.deferUpdate();
+      switch (click.customId) {
+        case "te":
+          await aboutTE(interaction);
+          break;
+        case "commons":
+          await aboutCommons(interaction);
+          break;
+        case "mvv":
+          await aboutMVV(interaction);
+          break;
+      }
+    });
+
+    collector.on("end", async () => {
+      await interaction.editReply({
+        content: "Sub-Menu timed out after 45 minutes...",
+        components: [],
+      });
     });
   } catch (e) {
     const err = e as Error;
@@ -56,16 +83,56 @@ export const about = async (interaction: ButtonInteraction): Promise<void> => {
 /**
  * Handles the content for "about Token engineering".
  *
- * @param {CommandInteraction} interaction The command interaction.
+ * @param {ButtonInteraction} interaction The source interaction.
  */
 export const aboutTE = async (
   interaction: ButtonInteraction
 ): Promise<void> => {
   try {
-    // const response =
     await interaction.editReply({
       content:
         "Token Engineering is an emerging engineering discipline focused on holistic systems design and the theory, practice and tools used to design and verify tokenized ecosystems",
+      components: [],
+    });
+  } catch (e) {
+    const err = e as Error;
+    logHandler.log("error", `${err.message}\n${err.stack}`);
+  }
+};
+
+/**
+ * Handles the contnet for "about Commons".
+ *
+ * @param {ButtonInteraction} interaction The source interaction.
+ */
+export const aboutCommons = async (
+  interaction: ButtonInteraction
+): Promise<void> => {
+  try {
+    await interaction.editReply({
+      content:
+        "Commons are resources that groups of people (communities, organizations) create and manage for individual and collective benefit. These resources are held collectively, not owned privately.\n[More Info](https://medium.com/commonsstack/automating-ostrom-for-effective-dao-management-cfe7a7aea138)",
+      components: [],
+    });
+  } catch (e) {
+    const err = e as Error;
+    logHandler.log("error", `${err.message}\n${err.stack}`);
+  }
+};
+
+/**
+ * Handles the content for "MVV".
+ *
+ * @param {ButtonInteraction} interaction The source Interaction.
+ */
+export const aboutMVV = async (
+  interaction: ButtonInteraction
+): Promise<void> => {
+  try {
+    await interaction.editReply({
+      content:
+        "**Vision**\n\nEnable the creation of ethical, safe, resilient and diverse economic systems to benefit societies around the world\n\n**Mission**\n\nOur goal is to become a [Schelling Point](https://nav.al/schelling-point) for the token engineering community.\nOur economic layer will fund projects that discover, develop and proliferate the best practices for engineering safe tokenized economies, while aligning our collective success with the individual benefit of token holders.\nOur social layer is even more important, as it will unite the token engineering field around the ethical principles, standards, tools and methodologies that emerge as this nascent field advances.\n\n**Values**\n\nOur Commons operates from a prosocial, human-centered perspective and prioritizes the advancement of token engineering over short-term profits.\nIntegrity, curiosity, constructive inquiry, presence and gratitude are foundational for maintaining mutual respect within our growing community.\nWe encourage our members to be radically open source, non-hierarchical, transparent in their intentions and accountable for their actions.",
+      components: [],
     });
   } catch (e) {
     const err = e as Error;
@@ -76,7 +143,7 @@ export const aboutTE = async (
 /**
  * Handles the content for "about WGs".
  *
- * @param {CommandInteraction} interaction The command interaction.
+ * @param {ButtonInteraction} interaction The command interaction.
  */
 export const aboutWG = async (
   interaction: ButtonInteraction
@@ -154,26 +221,6 @@ export const aboutProposals = async (
 };
 
 /**
- * Handles the contnet for "about Commons".
- *
- * @param {CommandInteraction} interaction The command interaction.
- */
-export const aboutCommons = async (
-  interaction: ButtonInteraction
-): Promise<void> => {
-  try {
-    // const response =
-    await interaction.editReply({
-      content:
-        "Commons are resources that groups of people (communities, organizations) create and manage for individual and collective benefit. These resources are held collectively, not owned privately.\n[More Info](https://medium.com/commonsstack/automating-ostrom-for-effective-dao-management-cfe7a7aea138)",
-    });
-  } catch (e) {
-    const err = e as Error;
-    logHandler.log("error", `${err.message}\n${err.stack}`);
-  }
-};
-
-/**
  * Handles the content for "how to discord".
  *
  * @param {CommandInteraction} interaction The command interaction.
@@ -185,24 +232,6 @@ export const usingDiscord = async (
     // const response =
     await interaction.editReply({
       content: "<Coming soon...!>",
-    });
-  } catch (e) {
-    const err = e as Error;
-    logHandler.log("error", `${err.message}\n${err.stack}`);
-  }
-};
-
-/**
- * Handles the content for "MVV".
- *
- * @param {CommandInteraction} interaction The command interaction.
- */
-export const mvv = async (interaction: ButtonInteraction): Promise<void> => {
-  try {
-    // const response =
-    await interaction.editReply({
-      content:
-        "**Vision**\n\nEnable the creation of ethical, safe, resilient and diverse economic systems to benefit societies around the world\n\n**Mission**\n\nOur goal is to become a [Schelling Point](https://nav.al/schelling-point) for the token engineering community.\nOur economic layer will fund projects that discover, develop and proliferate the best practices for engineering safe tokenized economies, while aligning our collective success with the individual benefit of token holders.\nOur social layer is even more important, as it will unite the token engineering field around the ethical principles, standards, tools and methodologies that emerge as this nascent field advances.\n\n**Values**\n\nOur Commons operates from a prosocial, human-centered perspective and prioritizes the advancement of token engineering over short-term profits.\nIntegrity, curiosity, constructive inquiry, presence and gratitude are foundational for maintaining mutual respect within our growing community.\nWe encourage our members to be radically open source, non-hierarchical, transparent in their intentions and accountable for their actions.",
     });
   } catch (e) {
     const err = e as Error;

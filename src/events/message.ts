@@ -36,6 +36,8 @@ export const onMessage = async (message: Message): Promise<void> => {
     message.content === "~journey-setup" &&
     message.author.id === "558192816308617227"
   ) {
+
+
     const embed = new MessageEmbed();
     embed.setTitle("Welcome to the TEC!");
     embed.setDescription(

@@ -3,11 +3,8 @@ import { Interaction } from "discord.js";
 import {
   about,
   aboutWG,
-  aboutTE,
-  aboutCommons,
   aboutPraise,
   aboutProposals,
-  mvv,
   usingDiscord,
   contribute,
 } from "../modules/about";
@@ -54,18 +51,7 @@ export const interactionCreate = async (
           await interaction.deferReply({ ephemeral: true });
           await usingDiscord(interaction);
           break;
-        case "te":
-          await interaction.deferReply({ ephemeral: true });
-          await aboutTE(interaction);
-          break;
-        case "mvv":
-          await interaction.deferReply({ ephemeral: true });
-          await mvv(interaction);
-          break;
-        case "commons":
-          await interaction.deferReply({ ephemeral: true });
-          await aboutCommons(interaction);
-          break;
+
         /*
         case "time":
           await interaction.deferReply({ ephemeral: true });
