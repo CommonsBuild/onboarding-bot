@@ -9,8 +9,8 @@ import {
   MessageSelectMenu,
 } from "discord.js";
 
-import { logHandler } from "../utils/logHandler";
-import { sendLogMessage } from "../utils/sendLogMessage";
+import { logHandler } from "../../utils/logHandler";
+import { sendLogMessage } from "../../utils/sendLogMessage";
 
 import { verifyUser } from "./verifyUser";
 
