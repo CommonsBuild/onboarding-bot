@@ -16,6 +16,12 @@ export const guildMemberAdd = async (member: GuildMember): Promise<void> => {
     );
     setTimeout(async () => {
       const updated = await member.fetch();
+      if (updated.user.bot) {
+        await sendLogMessage(
+          `${member.user.tag} wasn't kicked, because they're a valid bot. They're one of the good ones! :)`
+        );
+        return;
+      }
       if (
         !updated.roles.cache.find(
           (role) => role.id === process.env.VERIFIED_ROLE
