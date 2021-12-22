@@ -9,8 +9,8 @@ import {
   MessageSelectMenu,
 } from "discord.js";
 
-import { logHandler } from "../utils/logHandler";
-import { sendLogMessage } from "../utils/sendLogMessage";
+import { logHandler } from "../../utils/logHandler";
+import { sendLogMessage } from "../../utils/sendLogMessage";
 
 import { verifyUser } from "./verifyUser";
 
@@ -60,12 +60,9 @@ export const question = async (
     collector.on("collect", async (collected) => {
       if (collected.isSelectMenu()) {
         if (collected.values[0] === "no") {
-          await collected.reply({
-            content: "Correct! Please wait...",
-            ephemeral: true,
-          });
           await interaction.editReply({
-            content: "Congrats! You will be verified shortly.",
+            content:
+              "Correct! Please wait...\nYou will be given access shortly...",
             components: [],
           });
           setTimeout(
@@ -82,10 +79,11 @@ export const question = async (
               "https://discord.com/channels/810180621930070088/913086515574358066/913110202218319932"
             )
             .setStyle("LINK");
-          await interaction.editReply({
+          await collected.reply({
             content:
               "For more info about the TEC, check out the <#913086515574358066> channel",
             components: [new MessageActionRow().addComponents(button)],
+            ephemeral: true,
           });
         } else {
           await interaction.editReply({
