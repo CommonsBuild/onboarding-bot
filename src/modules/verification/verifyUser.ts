@@ -21,27 +21,34 @@
  *
  */
 
-import { createLogger, format, transports, config } from "winston";
+import { Guild, GuildMember } from "discord.js";
 
-const { combine, timestamp, colorize, printf } = format;
+import { logHandler } from "../../utils/logHandler";
+import { sendLogMessage } from "../../utils/sendLogMessage";
 
 /**
- * Standard log handler, using winston to wrap and format
- * messages. Call with `logHandler.log(level, message)`.
+ * Grants the verified role to a user.
  *
- * @param {string} level - The log level to use.
- * @param {string} message - The message to log.
+ * @param {GuildMember} user The user to verify.
+ * @param {Guild} guild The guild the user is in.
  */
-export const logHandler = createLogger({
-  levels: config.npm.levels,
-  level: "silly",
-  transports: [new transports.Console()],
-  format: combine(
-    timestamp({
-      format: "YYYY-MM-DD HH:mm:ss",
-    }),
-    colorize(),
-    printf((info) => `${info.level}: ${[info.timestamp]}: ${info.message}`)
-  ),
-  exitOnError: false,
-});
+export const verifyUser = async (
+  user: GuildMember,
+  guild: Guild
+): Promise<void> => {
+  try {
+    const verifyRole = await guild.roles.fetch(
+      process.env.VERIFIED_ROLE || "oh no!"
+    );
+
+    if (!verifyRole) {
+      logHandler.log("error", "Could not locate verified role!");
+      return;
+    }
+    await user.roles.add(verifyRole);
+    await sendLogMessage(`${user.user.tag} was verified!`);
+  } catch (e) {
+    const err = e as Error;
+    logHandler.log("error", `${err.message}\n${err.stack}`);
+  }
+};

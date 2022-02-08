@@ -1,18 +1,34 @@
+/*
+ * This file is part of the tec-onboarding-bot project
+ * The contents are derived from the commit-your-code-bot project
+ *
+ * Copyright (c) 2021 nhcarigan
+ * Authors: Naomi Carrigan
+ *
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ */
+
 import { Interaction } from "discord.js";
 
-import {
-  about,
-  aboutWG,
-  aboutTE,
-  aboutCommons,
-  aboutPraise,
-  aboutProposals,
-  mvv,
-  usingDiscord,
-  contribute,
-} from "../modules/about";
-// import { schedule } from "../modules/schedule";
-import { question } from "../modules/question";
+import { aboutMenu } from "../modules/guide/aboutMenu";
+import { contributeMenu } from "../modules/guide/contributeMenu";
+import { organisationMenu } from "../modules/guide/organisationMenu";
+import { praiseMenu } from "../modules/guide/praiseMenu";
+import { proposalsMenu } from "../modules/guide/proposalsMenu";
+import { question } from "../modules/verification/question";
 import { logHandler } from "../utils/logHandler";
 
 /**
@@ -32,39 +48,23 @@ export const interactionCreate = async (
           break;
         case "about":
           await interaction.deferReply({ ephemeral: true });
-          await about(interaction);
+          await aboutMenu(interaction);
           break;
         case "wg":
           await interaction.deferReply({ ephemeral: true });
-          await aboutWG(interaction);
-          break;
-        case "contribute":
-          await interaction.deferReply({ ephemeral: true });
-          await contribute(interaction);
+          await organisationMenu(interaction);
           break;
         case "praise":
           await interaction.deferReply({ ephemeral: true });
-          await aboutPraise(interaction);
+          await praiseMenu(interaction);
           break;
         case "proposal":
           await interaction.deferReply({ ephemeral: true });
-          await aboutProposals(interaction);
+          await proposalsMenu(interaction);
           break;
-        case "discord-channels":
+        case "contribute":
           await interaction.deferReply({ ephemeral: true });
-          await usingDiscord(interaction);
-          break;
-        case "te":
-          await interaction.deferReply({ ephemeral: true });
-          await aboutTE(interaction);
-          break;
-        case "mvv":
-          await interaction.deferReply({ ephemeral: true });
-          await mvv(interaction);
-          break;
-        case "commons":
-          await interaction.deferReply({ ephemeral: true });
-          await aboutCommons(interaction);
+          await contributeMenu(interaction);
           break;
         /*
         case "time":

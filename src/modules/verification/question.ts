@@ -1,3 +1,26 @@
+/*
+ * This file is part of the tec-onboarding-bot project
+ * The contents are derived from the commit-your-code-bot project
+ *
+ * Copyright (c) 2021 nhcarigan
+ * Authors: Naomi Carrigan
+ * Modified by: Vyvy-vi
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ */
+
 import {
   ButtonInteraction,
   CommandInteraction,
@@ -9,8 +32,8 @@ import {
   MessageSelectMenu,
 } from "discord.js";
 
-import { logHandler } from "../utils/logHandler";
-import { sendLogMessage } from "../utils/sendLogMessage";
+import { logHandler } from "../../utils/logHandler";
+import { sendLogMessage } from "../../utils/sendLogMessage";
 
 import { verifyUser } from "./verifyUser";
 
@@ -60,12 +83,9 @@ export const question = async (
     collector.on("collect", async (collected) => {
       if (collected.isSelectMenu()) {
         if (collected.values[0] === "no") {
-          await collected.reply({
-            content: "Correct! Please wait...",
-            ephemeral: true,
-          });
           await interaction.editReply({
-            content: "Congrats! You will be verified shortly.",
+            content:
+              "Correct! Please wait...\nYou will be given access shortly...",
             components: [],
           });
           setTimeout(
@@ -82,10 +102,11 @@ export const question = async (
               "https://discord.com/channels/810180621930070088/913086515574358066/913110202218319932"
             )
             .setStyle("LINK");
-          await interaction.editReply({
+          await collected.reply({
             content:
               "For more info about the TEC, check out the <#913086515574358066> channel",
             components: [new MessageActionRow().addComponents(button)],
+            ephemeral: true,
           });
         } else {
           await interaction.editReply({
