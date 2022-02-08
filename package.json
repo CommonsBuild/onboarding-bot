@@ -1,7 +1,7 @@
 {
-  "name": "commit-your-code-bot",
+  "name": "onboarding-bot",
   "version": "1.0.1",
-  "description": "A verification gate for the Commit Your Code Discord server.",
+  "description": "An onboarding bot for discord communities.",
   "main": "./prod/index.js",
   "scripts": {
     "prebuild": "rm -rf ./prod",
@@ -12,14 +12,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nhcarrigan/commit-your-code-bot.git"
+    "url": "git+https://github.com/CommonsBuild/onboarding-bot.git"
   },
-  "author": "Nicholas Carrigan",
+  "author": "Vyvy-vi",
   "license": "AGPL-3.0-or-later",
   "bugs": {
-    "url": "https://github.com/nhcarrigan/commit-your-code-bot/issues"
+    "url": "https://github.com/CommonsBuild/onboarding-bot/issues"
   },
-  "homepage": "https://github.com/nhcarrigan/commit-your-code-bot#readme",
+  "homepage": "https://github.com/CommonsBuild/onboarding-bot#readme",
   "engines": {
     "node": "^16.9.1",
     "npm": "^7.24.0"

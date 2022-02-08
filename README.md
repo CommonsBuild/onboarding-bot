@@ -2,11 +2,9 @@
 
 Discord Bot that creates an Onboarding Flow for communities that use discord as their primary source of interaction.
 
-## Live Version
+## Creating your own instance of the bot
 
-This page is not yet deployed.
-
-<!--This page is currently deployed. [View the live website.]()-->
+If you're a community that wants to set up the onboarding-bot, check out the [setup docs](#). 
 
 ## Feedback and Bugs
 
@@ -22,7 +20,7 @@ Before interacting with our community, please read our [Code of Conduct](CODE_OF
 
 ## Licensing
 
-Copyright (C) 2021 Nicholas Carrigan
+Copyright (C) 2021 Naomi Carrigan
 Copyright (C) 2022 Vyvy-vi 
 
 This program is free software: you can redistribute it and/or modify it under the terms of the GNU Affero General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.

@@ -3,7 +3,7 @@
  * The contents are derived from the commit-your-code-bot project
  *
  * Copyright (c) 2021 nhcarigan
- * Authors: Nicholas Carrigan
+ * Authors: Naomi Carrigan
  * Modified by: Vyvy-vi
  *
  * This program is free software: you can redistribute it and/or modify
