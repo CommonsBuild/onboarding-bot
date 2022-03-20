@@ -82,6 +82,11 @@ export const onMessage = async (message: Message): Promise<void> => {
       .setStyle("PRIMARY");
     */
 
+    const acquireTECButton = new MessageButton()
+      .setCustomId("acquire-tec")
+      .setLabel("How to acquire TEC tokens?")
+      .setStyle("SUCCESS");
+
     const proposalButton = new MessageButton()
       .setCustomId("proposal")
       .setLabel("How to make a proposal?")
@@ -92,24 +97,25 @@ export const onMessage = async (message: Message): Promise<void> => {
       .setLabel("What is Praise?")
       .setStyle("PRIMARY");
 
+    const contributeButton = new MessageButton()
+      .setCustomId("contribute")
+      .setLabel("I want to contribute to the TEC!")
+      .setStyle("SUCCESS");
+
     const buttonsA = new MessageActionRow().addComponents(
       aboutButton,
       wgButton,
-      praiseButton
-    );
-    const buttonsB = new MessageActionRow().addComponents(
+      praiseButton,
       proposalButton
-      //discordButton
     );
-    const buttonsC = new MessageActionRow().addComponents(
-      new MessageButton()
-        .setCustomId("contribute")
-        .setLabel("I want to contribute to the TEC!")
-        .setStyle("SUCCESS")
+
+    const buttonsB = new MessageActionRow().addComponents(
+      contributeButton,
+      acquireTECButton
     );
     await message.channel.send({
       embeds: [embed],
-      components: [buttonsA, buttonsB, buttonsC],
+      components: [buttonsA, buttonsB],
     });
     await message.delete();
   }
