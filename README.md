@@ -4,7 +4,7 @@ Discord Bot that creates an Onboarding Flow for communities that use discord as 
 
 ## Creating your own instance of the bot
 
-If you're a community that wants to set up the onboarding-bot, check out the [setup docs](#). 
+If you're a community that wants to set up the onboarding-bot, check out the [setup docs](#).
 
 ## Feedback and Bugs
 
@@ -21,7 +21,7 @@ Before interacting with our community, please read our [Code of Conduct](CODE_OF
 ## Licensing
 
 Copyright (C) 2021 Naomi Carrigan \
-Copyright (C) 2022 Vyvy-vi 
+Copyright (C) 2022 Vyvy-vi
 
 This program is free software: you can redistribute it and/or modify it under the terms of the GNU Affero General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 
@@ -34,7 +34,7 @@ The full license terms may be viewed in the [LICENSE.md file](./LICENSE.md)
 This repo, particularly the _verification module_ is derived work that is based on the implementation created by [@nhcarrigan](https://github.com/nhcarrigan) in their [commit-your-code-bot project](https://github.com/nhcarrigan/commit-your-code/), which was forked into this repo from the state at tree hash - [b061977989563be1d0a15d84163a00e9185d78b6](https://github.com/nhcarrigan/commit-your-code-bot/tree/b061977989563be1d0a15d84163a00e9185d78b6).
 
 This project makes the following modifications and additions:
+
 - Changed folder structure for the modules to group verification modules into [`src/modules/verification/`](./src/modules/verification)
 - Modified the `src/events/guildMemberAdd.ts` code to prevent bots from being banned.
 - Added functionality for a different feature - `guide`, which can be viewed in [`src/modules/guide`](./src/modules/guide).
-

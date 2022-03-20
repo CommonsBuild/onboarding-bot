@@ -7,6 +7,9 @@
  *
  *
  * This program is free software: you can redistribute it and/or modify
+There are two ways to make an impact: One is to contribute your talent and time. The other is by acquiring $TEC, which allows you to help steer the TEC while directly supporting its mission( https://token-engineering-commons.gitbook.io/tec-handbook/what-is-the-tec/mission-vision-and-values). Here's how.
+https://token-engineering-commons.gitbook.io/tec-handbook/how-to-purchase-usdtec.
+
  * it under the terms of the GNU Affero General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
@@ -28,6 +31,7 @@ import { contributeMenu } from "../modules/guide/contributeMenu";
 import { organisationMenu } from "../modules/guide/organisationMenu";
 import { praiseMenu } from "../modules/guide/praiseMenu";
 import { proposalsMenu } from "../modules/guide/proposalsMenu";
+import { acquireTECMenu } from "../modules/guide/acquireTECMenu";
 import { question } from "../modules/verification/question";
 import { logHandler } from "../utils/logHandler";
 
@@ -41,30 +45,28 @@ export const interactionCreate = async (
 ): Promise<void> => {
   try {
     if (interaction.isButton()) {
+      await interaction.deferReply({ ephemeral: true });
       switch (interaction.customId) {
         case "verify":
-          await interaction.deferReply({ ephemeral: true });
           await question(interaction);
           break;
         case "about":
-          await interaction.deferReply({ ephemeral: true });
           await aboutMenu(interaction);
           break;
         case "wg":
-          await interaction.deferReply({ ephemeral: true });
           await organisationMenu(interaction);
           break;
         case "praise":
-          await interaction.deferReply({ ephemeral: true });
           await praiseMenu(interaction);
           break;
         case "proposal":
-          await interaction.deferReply({ ephemeral: true });
           await proposalsMenu(interaction);
           break;
         case "contribute":
-          await interaction.deferReply({ ephemeral: true });
           await contributeMenu(interaction);
+          break;
+        case "acquire-tec":
+          await acquireTECMenu(interaction);
           break;
         /*
         case "time":
