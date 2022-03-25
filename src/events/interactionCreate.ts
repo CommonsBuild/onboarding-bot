@@ -45,27 +45,33 @@ export const interactionCreate = async (
 ): Promise<void> => {
   try {
     if (interaction.isButton()) {
-      await interaction.deferReply({ ephemeral: true });
       switch (interaction.customId) {
         case "verify":
+          await interaction.deferReply({ ephemeral: true });
           await question(interaction);
           break;
         case "about":
+          await interaction.deferReply({ ephemeral: true });
           await aboutMenu(interaction);
           break;
         case "wg":
+          await interaction.deferReply({ ephemeral: true });
           await organisationMenu(interaction);
           break;
         case "praise":
+          await interaction.deferReply({ ephemeral: true });
           await praiseMenu(interaction);
           break;
         case "proposal":
+          await interaction.deferReply({ ephemeral: true });
           await proposalsMenu(interaction);
           break;
         case "contribute":
+          await interaction.deferReply({ ephemeral: true });
           await contributeMenu(interaction);
           break;
         case "acquire-tec":
+          await interaction.deferReply({ ephemeral: true });
           await acquireTECMenu(interaction);
           break;
         /*

@@ -24,7 +24,9 @@ export const acquireTECMenu = async (
         new MessageActionRow().addComponents(
           new MessageButton()
             .setLabel("How to purchase $TEC?")
-            .setURL("https://token-engineering-commons.gitbook.io/tec-handbook/how-to-purchase-usdtec")
+            .setURL(
+              "https://token-engineering-commons.gitbook.io/tec-handbook/how-to-purchase-usdtec"
+            )
             .setStyle("LINK")
         ),
       ],
